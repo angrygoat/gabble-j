@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.angrygoat.gabble</groupId>
-	<artifactId>gabble-pom</artifactId>
+	<groupId>org.angrygoat</groupId>
+	<artifactId>gabble-j-pom</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Gabble POM</name>
@@ -13,9 +13,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sl4j.version>1.7.25</sl4j.version>
 		<log4j.version>1.2.17</log4j.version>
-		<java.version>1.11</java.version>
+		<java.version>11</java.version>
 		<maven.war.plugin.version>3.0.0</maven.war.plugin.version>
-		<netty.version>4.1.16.Final</netty.version>
+		<netty.version>4.1.42.Final</netty.version>
 	</properties>
 	<issueManagement>
 		<system>Git</system>
@@ -66,22 +66,46 @@
 				<artifactId>netty-all</artifactId>
 				<version>${netty.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>3.23.1-GA</version>
+			</dependency>
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib-nodep</artifactId>
+				<version>3.2.7</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>
 		<pluginManagement>
-
 		</pluginManagement>
 		<plugins>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<generateBackupPoms>false</generateBackupPoms>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.1</version>
+				<version>2.22.0</version>
 				<configuration>
-					<includes>
-						<include>**/AllTests.java</include>
-					</includes>
+					<argLine> --illegal-access=permit
+					</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<argLine> --illegal-access=permit
+					</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -89,13 +113,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<debug>false</debug>
-					<optimize>true</optimize>
-					<fork>true</fork>
-					<compilerVersion>${java.version}</compilerVersion>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<compilerArgument>-Xlint:-unchecked</compilerArgument>
+					<release>${java.version}</release>
 				</configuration>
 			</plugin>
 		</plugins>
