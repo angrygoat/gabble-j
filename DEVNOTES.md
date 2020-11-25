@@ -5,6 +5,7 @@
 
 * Netty User Guide - https://netty.io/wiki/user-guide-for-4.x.html
 * Netty API Guide - https://netty.io/4.1/api/index.html
+* Netty Tutorial - http://seeallhearall.blogspot.com/2012/05/netty-tutorial-part-1-introduction-to.html
 
 ### Build and Development Notes
 
