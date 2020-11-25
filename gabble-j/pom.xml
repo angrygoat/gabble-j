@@ -26,5 +26,7 @@
 	</build>
 	<modules>
 		<module>gabble-j-core</module>
+		<module>gabble-j-service</module>
+
 	</modules>
 </project>
